@@ -43,4 +43,32 @@ describe('Item API test', () => {
         });
     });
   });
+  
+  describe('Add item', () => {
+    it('should add item to db', done => {
+      chai
+        .request(app)
+        .post(BASE_TESTED_ENDPOINT)
+        .send({ name: 'testname' })
+        .end((err, res) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+
+          done();
+        });
+    });
+
+    it('should return BAD REQUEST if name was not sent', done => {
+      chai
+        .request(app)
+        .post(BASE_TESTED_ENDPOINT)
+        .send()
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+
+          done();
+        });
+    });
+  });
 });
