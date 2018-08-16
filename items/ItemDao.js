@@ -21,6 +21,10 @@ class ItemDao {
   decrementRating(itemId) {
     return Item.findOneAndUpdate({ _id: itemId }, { $inc: { rating: -1 } });
   }
+
+  remove(itemId) {
+    return Item.findByIdAndRemove(itemId);
+  }
 }
 
 module.exports = ItemDao;

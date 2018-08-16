@@ -30,6 +30,10 @@ class ItemService {
   decrementRating(itemId) {
     return this.dao.decrementRating(itemId);
   }
+
+  remove(itemId) {
+    return this.dao.remove(itemId);
+  }
 }
 
 module.exports = new ItemService(itemDao);

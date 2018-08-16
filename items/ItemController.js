@@ -60,7 +60,7 @@ class ItemController {
 
       const item = await this.itemService.incrementRating(id);
 
-      return res.send(items);
+      return res.send(item);
     } catch (error) {
       this.handleErrors(error, req, res);
     }
@@ -75,10 +75,26 @@ class ItemController {
 
       const item = await this.itemService.decrementRating(id);
 
-      return res.send(items);
+      return res.send(item);
     } catch (error) {
       this.handleErrors(error, req, res);
     }
+  }
+
+  async removeItem(req, res) {
+    try {
+      const { id } = req.params;
+      if (!id) {
+        return res.sendStatus(400);
+      }
+
+      await this.itemService.remove(id);
+
+      return res.sendStatus(204);
+    } catch (error) {
+      this.handleErrors(error, req, res);
+    }
+
   }
 
   handleErrors(error, req, res) {
