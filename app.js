@@ -8,6 +8,8 @@ dotenv.config();
 const routes = require('./routes');
 const mongoConfig = require('./config/mongoConfig');
 
+const port = process.env.PORT || 3000;
+
 mongoConfig();
 
 const app = express();
@@ -16,6 +18,6 @@ app.use(cors());
 app.use(bodyParser());
 app.use(routes);
 
-app.listen(process.env.PORT, () => console.log(`Server listening on port ${process.env.PORT}`));
+app.listen(port, () => console.log(`Server listening on port ${port}`));
 
 module.exports = app;
