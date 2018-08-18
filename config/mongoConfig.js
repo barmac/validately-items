@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
-module.exports = function() {
-  console.log(`Connecting to database url: ${process.env.MONGO_URL} ...`);
+const mongoUri = process.env.MONGODB_URL;
 
-  mongoose.connect(process.env.MONGO_URL);
+module.exports = function() {
+  console.log(`Connecting to database url: ${mongoUri} ...`);
+
+  mongoose.connect(mongoUri);
   mongoose.Promise = global.Promise;
   const dbConnection = mongoose.connection;
 
