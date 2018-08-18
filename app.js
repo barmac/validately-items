@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser());
+app.use(morgan('combined'));
 app.use(routes);
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
