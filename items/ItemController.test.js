@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'test';
-process.env.MONGO_URL = 'mongodb://localhost:27017/validately-items-test';
+process.env.MONGODB_URI = 'mongodb://localhost:27017/validately-items-test';
 
 const mongoose = require('mongoose');
 const chai = require('chai');
@@ -27,7 +27,7 @@ const waitForDatabaseConnection = (mongoose) => new Promise((resolve, reject) =>
 describe('Item API test', () => {
   beforeEach(function () {
     this.timeout(5000);
-    
+
     return waitForDatabaseConnection(mongoose)
       .then(() => mongoose.connection.db.dropDatabase());
   });
@@ -47,7 +47,7 @@ describe('Item API test', () => {
         });
     });
   });
-  
+
   describe('Add item', () => {
     it('should add item to db', done => {
       chai
@@ -75,7 +75,7 @@ describe('Item API test', () => {
         });
     });
   });
-  
+
   describe('Update item', () => {
     let item;
 
