@@ -76,6 +76,40 @@ describe('Item API test', () => {
     });
   });
 
+  describe('Vote up and down', () => {
+    let item;
+
+    beforeEach(async () => {
+      item = await new Item({ name: 'fake' }).save();
+    });
+
+    it('should increment rating', async () => {
+      const res = await chai.request(app)
+        .post(BASE_TESTED_ENDPOINT + `/${item._id}/vote-up`)
+        .send({});
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+
+      const updatedItem = await Item.findById(item._id);
+
+      expect(updatedItem.rating).to.be.equal(item.rating + 1);
+    });
+
+    it('should decrement rating', async () => {
+      const res = await chai.request(app)
+        .post(BASE_TESTED_ENDPOINT + `/${item._id}/vote-down`)
+        .send({});
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('object');
+
+      const updatedItem = await Item.findById(item._id);
+
+      expect(updatedItem.rating).to.be.equal(item.rating - 1);
+    });
+  });
+
   describe('Update item', () => {
     let item;
 
